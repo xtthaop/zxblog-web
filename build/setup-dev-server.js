@@ -32,8 +32,7 @@ module.exports = function setupDevServer(app, cb){
   // dev middleware
   const clientCompiler = webpack(clientConfig)
   const devMiddleware = require('webpack-dev-middleware')(clientCompiler, {
-    publicPath: clientConfig.output.publicPath,
-    // serverSideRender: true,
+    publicPath: clientConfig.output.publicPath
   })
 
   app.use(devMiddleware)

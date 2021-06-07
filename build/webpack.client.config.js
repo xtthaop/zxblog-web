@@ -6,6 +6,7 @@ const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
 module.exports = merge(baseConfig, {
   entry: path.join(__dirname, '..', 'src/entry-client.js'),
   optimization: {
+    runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
