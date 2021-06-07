@@ -9,9 +9,7 @@ module.exports = merge(baseConfig, {
   target: 'node',
   devtool: 'source-map',
   output: {
-    library: {
-      type: 'commonjs2',
-    },
+    libraryTarget: 'commonjs2',
   },
   externals: nodeExternals({
     allowlist: /\.css$/

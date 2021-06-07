@@ -2,19 +2,31 @@ const express = require('express')
 const { createBundleRenderer } = require('vue-server-renderer')
 
 const server = express()
+const template = require('fs').readFileSync('./public/index.html', 'utf-8')
+const isProd = process.env.NODE_ENV === 'production'
 
-const template = require('fs').readFileSync('./index.template.html', 'utf-8')
-const serverBundle = require('./dist/vue-ssr-server-bundle.json')
-const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+function createRenderer(bundle, options){
+  return createBundleRenderer(bundle, Object.assign(options, {
+    template,
+  }))
+}
+
+let renderer, readyPromise
+if(isProd){
+  const serverBundle = require('./dist/vue-ssr-server-bundle.json')
+  const clientManifest = require('./dist/vue-ssr-client-manifest.json')
+  renderer = createRenderer(serverBundle, {
+    clientManifest,
+  })
+}else{
+  readyPromise = require('./build/setup-dev-server.js')(server, (bundle, options) => {
+    renderer = createRenderer(bundle, options)
+  })
+}
 
 server.use('/dist', express.static(__dirname + '/dist'))
 
 server.get('*', (req, res) => {
-  const renderer = createBundleRenderer(serverBundle, {
-    template,
-    clientManifest,
-  })
-
   const context = { url: req.url }
 
   renderer.renderToString(context, (err, html) => {
