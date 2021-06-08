@@ -16,7 +16,7 @@
       </li>
     </ul>
     <footer>
-      网站版权及备案
+      @2021 知行 · 陈涛的网络笔记 · 晋ICP备19000910号-1
     </footer>
   </div>
 </template>
@@ -96,8 +96,10 @@ export default {
   footer{
     width: 100%;
     height: 30px;
+    padding: 0 18px;
+    box-sizing: border-box;
     margin-top: 20px;
-    color: #999;
+    color: #ccc;
     font-size: 14px;
     line-height: 30px;
   }
