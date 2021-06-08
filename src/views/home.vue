@@ -20,7 +20,7 @@ export default {
   },
   methods: {
     handleClick(id){
-      console.log('文1', id)
+      console.log('文', id)
     }
   }
 }

@@ -22,7 +22,7 @@ module.exports = {
       { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7631&name=[hash:8]-[name].[ext]' },
       { test: /\.vue$/, loader: 'vue-loader' },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
-      { test: /\.css$/, use: ['vue-style-loader', 'css-loader'] },
+      { test: /\.(css|scss)$/, use: ['vue-style-loader', 'css-loader', 'sass-loader'] },
       {
         test: /\.svg$/,
         loader: 'svg-sprite-loader',

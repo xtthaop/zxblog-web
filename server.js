@@ -7,6 +7,7 @@ const isProd = process.env.NODE_ENV === 'production'
 
 function createRenderer(bundle, options){
   return createBundleRenderer(bundle, Object.assign(options, {
+    runInNewContext: false,
     template,
   }))
 }
@@ -27,7 +28,10 @@ if(isProd){
 server.use('/dist', express.static(__dirname + '/dist'))
 
 server.get('*', (req, res) => {
-  const context = { url: req.url }
+  const context = {
+    url: req.url,
+    title: '知行'
+  }
 
   renderer.renderToString(context, (err, html) => {
     if(err){

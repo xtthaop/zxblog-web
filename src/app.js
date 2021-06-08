@@ -4,6 +4,8 @@ import { createRouter } from './router'
 import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 
+import 'normalize.css/normalize.css'
+
 Vue.mixin({
   beforeRouteUpdate(to, from, next){
     const { asyncData } = this.$options
