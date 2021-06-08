@@ -1,14 +1,15 @@
 <template>
   <div class="layout">
-    <header>
-      <!-- <div>网站标题</div> -->
-    </header>
-    <!-- <div class="main">
-      <router-view></router-view>
+    <div class="header-wrap">
+      <header>
+        <div class="logo-wrap">知行</div>
+      </header>
     </div>
-    <footer>
-      网站版权与备案
-    </footer> -->
+    <div class="main-wrap">
+      <main>
+        <router-view></router-view>
+      </main>
+    </div>
   </div>
 </template>
 
@@ -20,14 +21,54 @@ export default {
 
 <style scoped lang="scss">
 .layout{
+  position: absolute;
   width: 100%;
+  height: 100%;
 
-  header{
+  .header-wrap{
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 56px;
     background: #fff;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #dedede;
     box-sizing: border-box;
+    margin-bottom: 10px;
+    z-index: 1030;
+
+    header{
+      width: 100%;
+      height: 100%;
+      padding: 0 18px;
+      max-width: 830px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
+
+    .logo-wrap{
+      display: inline-block;
+      line-height: 54px;
+      color: #1E90FF;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+  }
+
+  .main-wrap{
+    width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding-top: 66px;
+    background: #efefef;
+
+    main{
+      width: 100%;
+      height: 100%;
+      max-width: 830px;
+      margin: 0 auto;
+      box-sizing: border-box;
+    }
   }
 }
 </style>

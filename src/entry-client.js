@@ -1,4 +1,7 @@
 import { createApp } from './app'
+import NProgress from 'nprogress'
+
+NProgress.configure({ showSpinner: false })
 
 const { app, router, store } = createApp()
 
@@ -20,7 +23,7 @@ router.onReady(() => {
       return next()
     }
 
-    // 触发加载指示器
+    NProgress.start()
 
     Promise.all(activated.map(c => {
       if(c.asyncData){
@@ -28,7 +31,7 @@ router.onReady(() => {
       }
     })).then(() => {
 
-      // 停止加载指示器
+      NProgress.done()
 
       next()
     }).catch(next)
