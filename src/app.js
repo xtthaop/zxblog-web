@@ -5,6 +5,9 @@ import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 
 import 'normalize.css/normalize.css'
+import moment from 'moment'
+
+Vue.prototype.moment = moment
 
 Vue.mixin({
   beforeRouteUpdate(to, from, next){

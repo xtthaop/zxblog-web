@@ -1,53 +1,60 @@
 <template>
   <div class="home-wrap">
     <ul class="note-list">
-      <li 
-        v-for="n in 6" 
-        :key="n" 
-        @click="handleClick(n)"
-      >
-        <a class="title">怎样使用 Python 脚本制作可执行文件{{ n }}</a>
-        <p class="abstract">
-          她把写好的信纸对折，塞进她昨天买的黄皮信封里。她犹豫要不要在信封上写些什么，该有个收信人的，但她又想不出给谁——全是她发自肺腑的剖白，可惜别人看...
-        </p>
-        <div class="meta">
-          <span>2022-0{{n}}-03 11:02:03</span>
+      <li v-for="item in noteList" :key="item.note_id" @click="handleClick(item)">
+        <div class="content">
+          <a class="title">{{ item.note_title }}</a>
+          <p class="abstract">
+            {{ item.abstracrt }}
+          </p>
+          <div class="meta">
+            <span>{{ moment(item.create_time).format('YY-MM-DD HH:mm::ss') }}</span>
+          </div>
         </div>
       </li>
     </ul>
-    <footer>
-      @2021 知行 · 陈涛的网络笔记 · 晋ICP备19000910号-1
-    </footer>
+    <footer>@2018-2021 知行 · 陈涛的网络笔记 · 晋ICP备19000910号-1</footer>
   </div>
 </template>
 
 <script>
 export default {
-  asyncData({ store }){
+  asyncData({ store }) {
     return store.dispatch('fetchNoteList')
   },
   computed: {
     noteList(){
       return this.$store.state.noteList
-    }
+    },
   },
   methods: {
+    encryptNoteId(id){
+      let encryptId = (id * 2).toString()
+      encryptId = Array(encryptId.length < 6 ? 6 - encryptId.length + 1 || 0 : 0).join(0) + encryptId
+      encryptId = encryptId.replace(/0/g, 'f')
+      encryptId = encryptId.replace(/4/g, 'r')
+      return encryptId
+    },
     handleClick(id){
       console.log(id)
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
 .home-wrap{
+  width: 100%;
+
   ul{
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
-  p{ margin: 0; }
+  p{
+    margin: 0;
+  }
 
   .note-list{
     width: 100%;
@@ -57,29 +64,39 @@ export default {
     border-radius: 2px;
 
     li{
+      width: 100%;
       box-sizing: border-box;
       padding: 20px 18px;
       border-bottom: 1px solid #efefef;
 
-      .title{
-        display: inline-block;
-        font-size: 18px;
-        font-weight: 500;
-        line-height: 26px;
-        margin-bottom: 5px;
-      }
+      .content{
+        width: 100%;
 
-      .abstract{
-        line-height: 22px;
-        margin-bottom: 5px;
-        font-size: 13px;
-        color: #999;
-      }
+        .title{
+          display: inline-block;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 26px;
+          margin-bottom: 5px;
 
-      .meta{
-        line-height: 18px;
-        font-size: 12px;
-        color: #aaa;
+          &:hover{
+            cursor: pointer;
+            text-decoration: underline;
+          }
+        }
+
+        .abstract{
+          line-height: 22px;
+          margin-bottom: 5px;
+          font-size: 13px;
+          color: #999;
+        }
+
+        .meta{
+          line-height: 18px;
+          font-size: 12px;
+          color: #aaa;
+        }
       }
     }
 
@@ -95,13 +112,13 @@ export default {
 
   footer{
     width: 100%;
-    height: 30px;
-    padding: 0 18px;
+    padding: 10px 18px;
     box-sizing: border-box;
     margin-top: 20px;
+    line-height: 20px;
     color: #ccc;
     font-size: 14px;
-    line-height: 30px;
+    word-break: break-all;
   }
 }
 </style>
