@@ -1,9 +1,8 @@
 import request from '@/utils/request'
 
-export function getAllNoteList(params){
+export function getPublishedNoteList(){
   return request({
-    url: '/note/get_all_note_list',
+    url: '/note/get_published_note_list',
     method: 'get',
-    params,
   })
 }

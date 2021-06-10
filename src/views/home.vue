@@ -1,14 +1,14 @@
 <template>
   <div class="home-wrap">
-    <ul class="note-list">
-      <li v-for="item in noteList" :key="item.note_id" @click="handleClick(item)">
+    <ul class="note-list" v-if="noteList.length">
+      <li v-for="item in noteList" :key="item.note_id">
         <div class="content">
-          <a class="title">{{ item.note_title }}</a>
+          <a class="title" :href="`/p/${encryptNoteId(item.note_id)}`" target="_blank">{{ item.note_title }}</a>
           <p class="abstract">
-            {{ item.abstracrt }}
+            {{ getNoteAbstract(item.note_content) }}
           </p>
           <div class="meta">
-            <span>{{ moment(item.create_time).format('YY-MM-DD HH:mm::ss') }}</span>
+            <span>{{ moment(item.create_time).format('YYYY-MM-DD HH:mm:ss') }}</span>
           </div>
         </div>
       </li>
@@ -22,10 +22,18 @@ export default {
   asyncData({ store }) {
     return store.dispatch('fetchNoteList')
   },
+  data(){
+    return {
+      md: null,
+    }
+  },
   computed: {
     noteList(){
       return this.$store.state.noteList
     },
+  },
+  created(){
+    
   },
   methods: {
     encryptNoteId(id){
@@ -35,8 +43,14 @@ export default {
       encryptId = encryptId.replace(/4/g, 'r')
       return encryptId
     },
-    handleClick(id){
-      console.log(id)
+    getNoteAbstract(content){
+      const md = require('markdown-it')()
+      let abstract = md.render(content)
+      abstract = abstract.replace(/\n/g, '')
+      abstract = abstract.replace(/<code.+?code>/g, '')
+      abstract = abstract.replace(/<\/?.+?>/g, '')
+      abstract = abstract.substring(0, 90) + '...'
+      return abstract
     },
   },
 };
@@ -64,6 +78,7 @@ export default {
     border-radius: 2px;
 
     li{
+      position: relative;
       width: 100%;
       box-sizing: border-box;
       padding: 20px 18px;
@@ -72,12 +87,14 @@ export default {
       .content{
         width: 100%;
 
-        .title{
+        a.title{
           display: inline-block;
           font-size: 18px;
-          font-weight: 500;
+          font-weight: 700;
           line-height: 26px;
           margin-bottom: 5px;
+          color: #333;
+          text-decoration: none;
 
           &:hover{
             cursor: pointer;

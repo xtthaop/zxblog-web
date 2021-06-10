@@ -23,14 +23,12 @@ service.interceptors.response.use(
 
     // if the custom code is not 0, it is judged as an error.
     if(res.code !== 0){
-      // message.error(res.message || 'Error')
       return Promise.reject(res || new Error('Error'))
     }else{
       return res
     }
   },
   error => {
-    // message.error(error.response.data.message || error.message || 'Error')
     return Promise.reject(error)
   }
 )

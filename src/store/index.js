@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import { getAllNoteList } from '@/api/index.js'
+import { getPublishedNoteList } from '@/api/index.js'
 
 export function createStore(){
   return new Vuex.Store({
@@ -17,7 +17,7 @@ export function createStore(){
     },
     actions: {
       fetchNoteList({ commit }, params){
-        return getAllNoteList(params).then(res => {
+        return getPublishedNoteList(params).then(res => {
           commit('setNoteList', res.data.note_list)
         })
       }
