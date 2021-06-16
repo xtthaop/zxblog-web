@@ -2,7 +2,9 @@
   <div class="layout">
     <div class="header-wrap">
       <header>
-        <div class="logo-wrap">知行</div>
+        <div class="logo-wrap">
+          <img :src="logo" />
+        </div>
       </header>
     </div>
     <div class="main-wrap">
@@ -14,8 +16,15 @@
 </template>
 
 <script>
+import logo from '@/assets/images/logo.png'
+
 export default {
   name: 'Layout',
+  data(){
+    return {
+      logo
+    }
+  }
 }
 </script>
 
@@ -48,10 +57,13 @@ export default {
 
     .logo-wrap{
       display: inline-block;
-      line-height: 54px;
-      color: #1E90FF;
-      font-size: 28px;
-      letter-spacing: 1px;
+      height: 100%;
+      padding: 10px 0;
+      box-sizing: border-box;
+
+      img{
+        height: 100%;
+      }
     }
   }
 

@@ -5,7 +5,7 @@
         <h1 class="title">{{ note.note_title }}</h1>
         <div class="note-info">
           <a class="author-avatar" href="/" target="_blank">
-            <img src="">
+            <img :src="avatar" />
           </a>
           <div style="margin-left:10px;">
             <div class="author-name">tao</div>
@@ -34,6 +34,7 @@
 
 <script>
 import 'highlight.js/styles/atom-one-dark.css'
+import avatar from '@/assets/images/avatar.png'
 
 export default {
   asyncData({ store, route }) {
@@ -43,6 +44,11 @@ export default {
     note(){
       return this.$store.state.note
     },
+  },
+  data(){
+    return {
+      avatar,
+    }
   },
   methods: {
     parseMarkdown(content){
@@ -139,6 +145,7 @@ export default {
         height: 39px;
         background: #efefef;
         border-radius: 50%;
+        overflow: hidden;
       }
 
       .author-name{
