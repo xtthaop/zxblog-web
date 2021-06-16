@@ -11,6 +11,11 @@ export function createRouter(){
         path: '/',
         name: 'home',
         component: () => import('@/views/home.vue'),
+      },
+      {
+        path: '/note/:id',
+        name: 'note',
+        component: () => import('@/views/note/index'),
       }
     ],
   })

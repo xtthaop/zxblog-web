@@ -3,7 +3,7 @@
     <ul class="note-list" v-if="noteList.length">
       <li v-for="item in noteList" :key="item.note_id">
         <div class="content">
-          <a class="title" :href="`/p/${encryptNoteId(item.note_id)}`" target="_blank">{{ item.note_title }}</a>
+          <a class="title" :href="`/note/${encryptNoteId(item.note_id)}`" target="_blank">{{ item.note_title }}</a>
           <p class="abstract">
             {{ getNoteAbstract(item.note_content) }}
           </p>
@@ -22,22 +22,14 @@ export default {
   asyncData({ store }) {
     return store.dispatch('fetchNoteList')
   },
-  data(){
-    return {
-      md: null,
-    }
-  },
   computed: {
     noteList(){
       return this.$store.state.noteList
     },
   },
-  created(){
-    
-  },
   methods: {
     encryptNoteId(id){
-      let encryptId = (id * 2).toString()
+      let encryptId = id.toString()
       encryptId = Array(encryptId.length < 6 ? 6 - encryptId.length + 1 || 0 : 0).join(0) + encryptId
       encryptId = encryptId.replace(/0/g, 'f')
       encryptId = encryptId.replace(/4/g, 'r')
@@ -81,7 +73,7 @@ export default {
       position: relative;
       width: 100%;
       box-sizing: border-box;
-      padding: 20px 18px;
+      padding: 20px 30px;
       border-bottom: 1px solid #efefef;
 
       .content{

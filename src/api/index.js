@@ -6,3 +6,11 @@ export function getPublishedNoteList(){
     method: 'get',
   })
 }
+
+export function getNote(params){
+  return request({
+    url: '/note/get_note',
+    method: 'get',
+    params,
+  })
+}

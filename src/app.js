@@ -5,6 +5,7 @@ import { createStore } from './store'
 import { sync } from 'vuex-router-sync'
 
 import 'normalize.css/normalize.css'
+import '@/icons/index'
 import moment from 'moment'
 
 Vue.prototype.moment = moment
