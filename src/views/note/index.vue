@@ -81,7 +81,7 @@ export default {
           ]
         })
 
-        wx.ready(function(){
+        wx.ready(() => {
           wx.updateAppMessageShareData({
             title: this.note.note_title,
             desc: '测试描述',
