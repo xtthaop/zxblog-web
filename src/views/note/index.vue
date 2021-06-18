@@ -76,13 +76,13 @@ export default {
           nonceStr: res.data.nonceStr,
           signature: res.data.signature,
           jsApiList: [
-            'updateAppMessageShareData',
-            'updateTimelineShareData',
+            'onMenuShareAppMessage',
+            'onMenuShareTimeline',
           ]
         })
 
         wx.ready(() => {
-          wx.updateAppMessageShareData({
+          wx.onMenuShareAppMessage({
             title: this.note.note_title,
             desc: '测试描述',
             link: location.href,
@@ -91,6 +91,15 @@ export default {
               alert('success')
             }
           })
+
+          wx.onMenuShareTimeline({
+            title: this.note.note_title,
+            link: location.href,
+            imgUrl: 'https://i-1.lanrentuku.com/2020/11/9/18a0f05e-5e61-4d38-ac56-e9caeaaf4cc2.png',
+            success: function(){
+              alert('success')
+            }
+          }
         })
       })
     },
