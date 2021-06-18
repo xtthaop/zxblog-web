@@ -94,14 +94,14 @@ export default {
             title: this.note.note_title,
             desc: this.getNoteAbstract(this.note.note_content),
             link: location.href,
-            imgUrl: '/public/images/logo.png',
+            imgUrl: location.origin + '/public/images/logo.png',
             success: () => {}
           })
 
           wx.onMenuShareTimeline({
             title: this.note.note_title,
             link: location.href,
-            imgUrl: '/public/images/logo.png',
+            imgUrl: location.origin + '/public/images/logo.png',
             success: () => {}
           })
         })
