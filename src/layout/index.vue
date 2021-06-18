@@ -2,9 +2,9 @@
   <div class="layout">
     <div class="header-wrap">
       <header>
-        <div class="logo-wrap">
+        <a class="logo-wrap" href="/" target="_blank">
           <img :src="logo" />
-        </div>
+        </a>
       </header>
     </div>
     <div class="main-wrap">
@@ -60,6 +60,7 @@ export default {
       height: 100%;
       padding: 10px 0;
       box-sizing: border-box;
+      cursor: pointer;
 
       img{
         height: 100%;

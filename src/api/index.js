@@ -14,3 +14,11 @@ export function getNote(params){
     params,
   })
 }
+
+export function getWxConfig(params){
+  return request({
+    url: '/note/get_wx_config',
+    method: 'get',
+    params,
+  })
+}

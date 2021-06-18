@@ -23,6 +23,14 @@ if(isProd){
   readyPromise = require('./build/setup-dev-server.js')(server, (bundle, options) => {
     renderer = createRenderer(bundle, options)
   })
+
+  const { createProxyMiddleware } = require('http-proxy-middleware')
+  const options = {
+    target: 'https://zxctb.top',
+    changeOrigin: true,
+    ws: true,
+  }
+  server.use(createProxyMiddleware('/restful', options))
 }
 
 server.use('/dist', express.static(__dirname + '/dist'))

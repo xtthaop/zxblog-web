@@ -2,9 +2,13 @@ import axios from 'axios'
 
 // create an axios instance
 const service = axios.create({
-  baseURL: 'http://zxctb.top/restful',
+  baseURL: '/restful',
   timeout: 30000,
 })
+
+if(process.env.NODE_ENV === 'development' && process.env.VUE_ENV === 'server'){
+  service.defaults.baseURL = process.env.API_BASE_URL
+}
 
 // request interceptor
 service.interceptors.request.use(

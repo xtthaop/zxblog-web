@@ -28,8 +28,8 @@ export function createStore(){
       },
     },
     actions: {
-      fetchNoteList({ commit }, params){
-        return getPublishedNoteList(params).then(res => {
+      fetchNoteList({ commit }){
+        return getPublishedNoteList().then(res => {
           commit('setNoteList', res.data.note_list)
         })
       },

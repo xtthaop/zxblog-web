@@ -29,28 +29,71 @@
         </div>
       </div>
     </footer>
+
+    <ShareDialog></ShareDialog>
   </div>
 </template>
 
 <script>
 import 'highlight.js/styles/atom-one-dark.css'
 import avatar from '@/assets/images/avatar.png'
+import ShareDialog from './components/ShareDialog'
+import { getWxConfig } from '@/api/index'
 
 export default {
-  asyncData({ store, route }) {
+  asyncData({ store, route }){
     return store.dispatch('fetchNote', route.params.id)
   },
-  computed: {
-    note(){
-      return this.$store.state.note
-    },
+  components: {
+    ShareDialog,
   },
   data(){
     return {
       avatar,
     }
   },
+  computed: {
+    note(){
+      return this.$store.state.note
+    },
+  },
+  mounted(){
+    this.handleGetWxConfig()
+  },
   methods: {
+    handleGetWxConfig(){
+      const params = {
+        url: location.href
+      }
+
+      getWxConfig(params).then(res => {
+        const wx = require('weixin-js-sdk')
+
+        wx.config({
+          debug: true,
+          appId: res.data.appId,
+          timestamp: res.data.timestamp,
+          nonceStr: res.data.nonceStr,
+          signature: res.data.signature,
+          jsApiList: [
+            'updateAppMessageShareData',
+            'updateTimelineShareData',
+          ]
+        })
+
+        wx.ready(function(){
+          wx.updateAppMessageShareData({
+            title: this.note.note_title,
+            desc: '测试描述',
+            link: location.href,
+            imgUrl: 'https://i-1.lanrentuku.com/2020/11/9/18a0f05e-5e61-4d38-ac56-e9caeaaf4cc2.png',
+            success: function(){
+              alert('success')
+            }
+          })
+        })
+      })
+    },
     parseMarkdown(content){
       const hljs = require('highlight.js')
       const md = require('markdown-it')({
@@ -69,36 +112,36 @@ export default {
       })
 
       // add target="_blank" to all links
-    // Remember old renderer, if overridden, or proxy to default renderer
-    const defaultRender = md.renderer.rules.link_open || function(tokens, idx, options, env, self){
-      return self.renderToken(tokens, idx, options)
-    }
-
-    md.renderer.rules.link_open = function(tokens, idx, options, env, self){
-      // If you are sure other plugins can't add `target` - drop check below
-      const aIndex = tokens[idx].attrIndex('target')
-    
-      if(aIndex < 0){
-        tokens[idx].attrPush(['target', '_blank']) // add new attribute
-      }else{
-        tokens[idx].attrs[aIndex][1] = '_blank' // replace value of existing attr
+      // Remember old renderer, if overridden, or proxy to default renderer
+      const defaultRender = md.renderer.rules.link_open || function(tokens, idx, options, env, self){
+        return self.renderToken(tokens, idx, options)
       }
+
+      md.renderer.rules.link_open = function(tokens, idx, options, env, self){
+        // If you are sure other plugins can't add `target` - drop check below
+        const aIndex = tokens[idx].attrIndex('target')
       
-      // pass token to default renderer.
-      return defaultRender(tokens, idx, options, env, self)
-    }
+        if(aIndex < 0){
+          tokens[idx].attrPush(['target', '_blank']) // add new attribute
+        }else{
+          tokens[idx].attrs[aIndex][1] = '_blank' // replace value of existing attr
+        }
+        
+        // pass token to default renderer.
+        return defaultRender(tokens, idx, options, env, self)
+      }
 
-    // replace default image render rule
-    md.renderer.rules.image = (tokens, idx, options, env, self) => {
-      const token = tokens[idx]
-      token.attrs[token.attrIndex('alt')][1] = self.renderInlineAsText(token.children, options, env)
+      // replace default image render rule
+      md.renderer.rules.image = (tokens, idx, options, env, self) => {
+        const token = tokens[idx]
+        token.attrs[token.attrIndex('alt')][1] = self.renderInlineAsText(token.children, options, env)
 
-      return '<div class="image-package"><img' + 
-             '  src="' + token.attrs[token.attrIndex('src')][1] + '"' + 
-             '  alt="' + token.attrs[token.attrIndex('alt')][1] + '"' +
-             '  title="' + (token.attrs[token.attrIndex('title')] ? token.attrs[token.attrIndex('title')][1] : '') + '"' +
-             '/></div>'
-    }
+        return '<div class="image-package"><img' + 
+              '  src="' + token.attrs[token.attrIndex('src')][1] + '"' + 
+              '  alt="' + token.attrs[token.attrIndex('alt')][1] + '"' +
+              '  title="' + (token.attrs[token.attrIndex('title')] ? token.attrs[token.attrIndex('title')][1] : '') + '"' +
+              '/></div>'
+      }
 
       let abstract = md.render(content)
       return abstract
