@@ -99,7 +99,7 @@ export default {
             success: function(){
               alert('success')
             }
-          }
+          })
         })
       })
     },
