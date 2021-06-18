@@ -61,6 +61,15 @@ export default {
     this.handleGetWxConfig()
   },
   methods: {
+    getNoteAbstract(content){
+      const md = require('markdown-it')()
+      let abstract = md.render(content)
+      abstract = abstract.replace(/\n/g, '')
+      abstract = abstract.replace(/<code.+?code>/g, '')
+      abstract = abstract.replace(/<\/?.+?>/g, '')
+      abstract = abstract.substring(0, 90) + '...'
+      return abstract
+    },
     handleGetWxConfig(){
       const params = {
         url: location.href
@@ -70,7 +79,6 @@ export default {
         const wx = require('weixin-js-sdk')
 
         wx.config({
-          debug: true,
           appId: res.data.appId,
           timestamp: res.data.timestamp,
           nonceStr: res.data.nonceStr,
@@ -84,21 +92,17 @@ export default {
         wx.ready(() => {
           wx.onMenuShareAppMessage({
             title: this.note.note_title,
-            desc: '测试描述',
+            desc: this.getNoteAbstract(this.note.note_content),
             link: location.href,
-            imgUrl: 'https://i-1.lanrentuku.com/2020/11/9/18a0f05e-5e61-4d38-ac56-e9caeaaf4cc2.png',
-            success: function(){
-              alert('success')
-            }
+            imgUrl: '/public/images/logo.png',
+            success: () => {}
           })
 
           wx.onMenuShareTimeline({
             title: this.note.note_title,
             link: location.href,
-            imgUrl: 'https://i-1.lanrentuku.com/2020/11/9/18a0f05e-5e61-4d38-ac56-e9caeaaf4cc2.png',
-            success: function(){
-              alert('success')
-            }
+            imgUrl: '/public/images/logo.png',
+            success: () => {}
           })
         })
       })

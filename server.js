@@ -2,7 +2,7 @@ const express = require('express')
 const { createBundleRenderer } = require('vue-server-renderer')
 
 const server = express()
-const template = require('fs').readFileSync('./public/index.html', 'utf-8')
+const template = require('fs').readFileSync('./index.template.html', 'utf-8')
 const isProd = process.env.NODE_ENV === 'production'
 
 function createRenderer(bundle, options){
@@ -34,6 +34,7 @@ if(isProd){
 }
 
 server.use('/dist', express.static(__dirname + '/dist'))
+server.use('/public', express.static(__dirname + '/public'))
 
 server.get('*', (req, res) => {
   const context = {
