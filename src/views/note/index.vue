@@ -19,12 +19,26 @@
       <div class="option-bar">
         <div class="option">
           <div class="item">
-            <svg-icon iconClass="like" className="icon"></svg-icon>
-            <span class="text">赞赏</span>
+            <div class="btn">
+              <svg-icon iconClass="like" className="icon"></svg-icon>
+              <span class="text">赞赏</span>
+            </div>
           </div>
           <div class="item">
-            <svg-icon iconClass="share" className="icon"></svg-icon>
-            <span class="text">分享</span>
+            <div class="btn" @click.stop="shareMenuToggle">
+              <svg-icon iconClass="share" className="icon"></svg-icon>
+              <span class="text">分享</span>
+            </div>
+            <ul class="menu" v-if="shareMenuShow" @click="shareMenuToggle">
+              <li>
+                <svg-icon iconClass="link" className="icon link"></svg-icon>
+                <span>复制链接</span>
+              </li>
+              <li>
+                <svg-icon iconClass="wechat" className="icon wechat"></svg-icon>
+                <span>微信分享</span>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -50,6 +64,7 @@ export default {
   data(){
     return {
       avatar,
+      shareMenuShow: false,
     }
   },
   computed: {
@@ -61,6 +76,15 @@ export default {
     this.handleGetWxConfig()
   },
   methods: {
+    shareMenuToggle(){
+      if(this.shareMenuShow){
+        this.shareMenuShow = false
+        document.removeEventListener('click', this.shareMenuToggle)
+      }else{
+        this.shareMenuShow = true
+        document.addEventListener('click', this.shareMenuToggle)
+      }
+    },
     getNoteAbstract(content){
       const md = require('markdown-it')()
       let abstract = md.render(content)
@@ -239,22 +263,63 @@ footer{
       margin: 0 auto;
 
       .item{
+        position: relative;
         float: right;
-        display: flex;
-        align-items: center;
         line-height: 56px;
         margin-left: 15px;
         cursor: pointer;
 
-        .icon{
-          color: #03a9f4;
-          font-size: 22px;
+        .btn{
+          display: flex;
+          align-items: center;
+          user-select: none;
+
+          .icon{
+            color: #03a9f4;
+            font-size: 22px;
+          }
+
+          .text{
+            font-size: 14px;
+            color: #666;
+            margin-left: 2px;
+          }
         }
 
-        .text{
-          font-size: 16px;
-          color: #666;
-          margin-left: 2px;
+        .menu{
+          position: absolute;
+          left: 0;
+          bottom: 45px;
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          width: 110px;
+          border: 1px solid #efefef;
+          border-radius: 5px;
+          background: #fff;
+
+          li{
+            display: flex;
+            align-items: center;
+            margin: 0;
+            padding: 10px;
+            line-height: 18px;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 1px solid #efefef;
+
+            &:last-child{
+              border-bottom: none;
+            }
+
+            .icon{
+              margin-right: 5px;
+              font-size: 20px;
+              &.link{
+                color: #999;
+              }
+            }
+          }
         }
       }
     }
