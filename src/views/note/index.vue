@@ -30,7 +30,7 @@
               <span class="text">分享</span>
             </div>
             <ul class="menu" v-if="shareMenuShow" @click="shareMenuToggle">
-              <li>
+              <li @click="copyUrl">
                 <svg-icon iconClass="link" className="icon link"></svg-icon>
                 <span>复制链接</span>
               </li>
@@ -84,6 +84,14 @@ export default {
         this.shareMenuShow = true
         document.addEventListener('click', this.shareMenuToggle)
       }
+    },
+    copyUrl(){
+      const input = document.createElement('input')
+      input.setAttribute('value', location.href)
+      document.body.appendChild(input)
+      input.select()
+      document.execCommand('copy')
+      document.body.removeChild(input)
     },
     getNoteAbstract(content){
       const md = require('markdown-it')()
