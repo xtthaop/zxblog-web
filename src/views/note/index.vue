@@ -45,6 +45,7 @@
     </footer>
 
     <ShareDialog ref="shareDialog"></ShareDialog>
+    <SharePop v-if="sharePopShow" :sharePopShow.sync="sharePopShow"></SharePop>
   </div>
 </template>
 
@@ -52,6 +53,7 @@
 import 'highlight.js/styles/atom-one-dark.css'
 import avatar from '@/assets/images/avatar.png'
 import ShareDialog from './components/ShareDialog'
+import SharePop from './components/SharePop'
 import { getWxConfig } from '@/api/index'
 
 export default {
@@ -60,11 +62,13 @@ export default {
   },
   components: {
     ShareDialog,
+    SharePop,
   },
   data(){
     return {
       avatar,
       shareMenuShow: false,
+      sharePopShow: false,
     }
   },
   computed: {
@@ -85,6 +89,14 @@ export default {
         document.addEventListener('click', this.shareMenuToggle)
       }
     },
+    isWeChat(){
+      const ua = navigator.userAgent.toLowerCase()
+      if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true
+      }else{
+        return false
+      }
+    },
     copyUrl(){
       const input = document.createElement('input')
       input.setAttribute('value', location.href)
@@ -94,7 +106,11 @@ export default {
       document.body.removeChild(input)
     },
     showQRCode(){
-      this.$refs.shareDialog.open()
+      if(this.isWeChat()){
+        this.sharePopShow = true
+      }else{
+        this.$refs.shareDialog.open()
+      }
     },
     getNoteAbstract(content){
       const md = require('markdown-it')()
