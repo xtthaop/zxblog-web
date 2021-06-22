@@ -16,6 +16,7 @@
     "moment": "^2.29.1",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
+    "qrcode": "^1.4.4",
     "vue": "^2.6.13",
     "vue-router": "^3.5.1",
     "vue-server-renderer": "^2.6.13",

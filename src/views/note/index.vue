@@ -34,7 +34,7 @@
                 <svg-icon iconClass="link" className="icon link"></svg-icon>
                 <span>复制链接</span>
               </li>
-              <li>
+              <li @click="showQRCode">
                 <svg-icon iconClass="wechat" className="icon wechat"></svg-icon>
                 <span>微信分享</span>
               </li>
@@ -44,7 +44,7 @@
       </div>
     </footer>
 
-    <ShareDialog></ShareDialog>
+    <ShareDialog ref="shareDialog"></ShareDialog>
   </div>
 </template>
 
@@ -92,6 +92,9 @@ export default {
       input.select()
       document.execCommand('copy')
       document.body.removeChild(input)
+    },
+    showQRCode(){
+      this.$refs.shareDialog.open()
     },
     getNoteAbstract(content){
       const md = require('markdown-it')()
