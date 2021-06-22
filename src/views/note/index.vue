@@ -19,7 +19,7 @@
       <div class="option-bar">
         <div class="option">
           <div class="item">
-            <div class="btn">
+            <div class="btn" @click="$refs.likeDialog.open()">
               <svg-icon iconClass="like" className="icon"></svg-icon>
               <span class="text">赞赏</span>
             </div>
@@ -45,6 +45,7 @@
     </footer>
 
     <ShareDialog ref="shareDialog"></ShareDialog>
+    <LikeDialog ref="likeDialog"></LikeDialog>
     <SharePop v-if="sharePopShow" :sharePopShow.sync="sharePopShow"></SharePop>
   </div>
 </template>
@@ -53,6 +54,7 @@
 import 'highlight.js/styles/atom-one-dark.css'
 import avatar from '@/assets/images/avatar.png'
 import ShareDialog from './components/ShareDialog'
+import LikeDialog from './components/LikeDialog'
 import SharePop from './components/SharePop'
 import { getWxConfig } from '@/api/index'
 
@@ -63,6 +65,7 @@ export default {
   components: {
     ShareDialog,
     SharePop,
+    LikeDialog,
   },
   data(){
     return {
