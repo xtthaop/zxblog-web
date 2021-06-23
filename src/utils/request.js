@@ -6,7 +6,7 @@ const service = axios.create({
   timeout: 30000,
 })
 
-if(process.env.NODE_ENV === 'development' && process.env.VUE_ENV === 'server'){
+if(process.env.VUE_ENV === 'server'){
   service.defaults.baseURL = process.env.API_BASE_URL
 }
 
