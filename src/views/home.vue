@@ -13,7 +13,7 @@
         </div>
       </li>
     </ul>
-    <footer>@2018-2021 知行 · 陈涛的网络笔记 · 晋ICP备19000910号-1</footer>
+    <footer>©2018-2021 知行 · 陈涛的网络笔记 · 晋ICP备19000910号-1</footer>
   </div>
 </template>
 
