@@ -162,7 +162,7 @@ export default {
       })
     },
     parseMarkdown(content){
-      const hljs = require('highlight.js')
+      const hljs = import('highlight.js')
       const md = require('markdown-it')({
         breaks: true,
         highlight: (str, lang) => {
