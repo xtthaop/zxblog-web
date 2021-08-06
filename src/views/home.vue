@@ -8,7 +8,7 @@
             {{ getNoteAbstract(item.note_content) }}
           </p>
           <div class="meta">
-            <span>{{ moment(item.create_time).format('YYYY-MM-DD HH:mm:ss') }}</span>
+            <span>{{ moment(item.create_time).format('YYYY-MM-DD') }}</span>
           </div>
         </div>
       </li>

@@ -1,5 +1,7 @@
 const express = require('express')
 const { createBundleRenderer } = require('vue-server-renderer')
+const favicon = require('serve-favicon')
+const path = require('path')
 
 const server = express()
 const template = require('fs').readFileSync('./index.template.html', 'utf-8')
@@ -33,6 +35,7 @@ if(isProd){
   server.use(createProxyMiddleware('/restful', options))
 }
 
+server.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 server.use('/dist', express.static(__dirname + '/dist'))
 server.use('/public', express.static(__dirname + '/public'))
 

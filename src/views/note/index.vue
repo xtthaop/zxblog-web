@@ -9,7 +9,7 @@
           </a>
           <div style="margin-left:10px;">
             <div class="author-name">tao</div>
-            <div class="note-detail">{{ moment(note.create_time).format('YYYY-MM-DD HH:mm:ss') }}</div>
+            <div class="note-detail">{{ moment(note.create_time).format('YYYY-MM-DD') }}</div>
           </div>
         </div>
       </header>
