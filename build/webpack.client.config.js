@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const { merge } = require('webpack-merge')
 const baseConfig = require('./webpack.base.config.js')
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin')
@@ -24,7 +25,8 @@ const clientConfig = {
     },
   },
   plugins: [
-    new VueSSRClientPlugin()
+    new VueSSRClientPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/)
   ]
 }
 
@@ -35,7 +37,7 @@ if (process.env.npm_config_report) {
       analyzerPort: 3190,
       reportFilename: 'report.html',
       defaultSizes: 'parsed',
-      openAnalyzer: false,
+      openAnalyzer: true,
       generateStatsFile: false,
       statsFilename: 'stats.json',
       statsOptions: null,
