@@ -3,8 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-// import Home from '@/views/home.vue'
-// import Note from '@/views/note/index'
+import Home from '@/views/home.vue'
+import Note from '@/views/note/index'
 
 export function createRouter(){
   return new Router({
@@ -13,12 +13,12 @@ export function createRouter(){
       {
         path: '/',
         name: 'home',
-        component: () => import('@/views/home.vue'),
+        component: Home,
       },
       {
         path: '/note/:id',
         name: 'note',
-        component: () => import('@/views/note/index'),
+        component: Note,
       }
     ],
   })

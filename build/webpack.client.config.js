@@ -11,6 +11,7 @@ const clientConfig = {
     runtimeChunk: true,
     splitChunks: {
       chunks: 'all',
+      maxSize: 244 * 1024,
       cacheGroups: {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
