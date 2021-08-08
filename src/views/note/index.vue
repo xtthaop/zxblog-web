@@ -2,18 +2,27 @@
   <div class="note-wrap">
     <div class="note">
       <header>
-        <h1 class="title">{{ note.note_title }}</h1>
+        <h1 class="title">{{ note.publish_note_title }}</h1>
         <div class="note-info">
           <a class="author-avatar" href="/" target="_blank">
             <img :src="avatar" />
           </a>
           <div style="margin-left:10px;">
             <div class="author-name">tao</div>
-            <div class="note-detail">{{ moment(note.create_time).format('YYYY-MM-DD') }}</div>
+            <div class="note-detail">
+              <span>
+                <span>发布于</span>
+                <span>{{ moment(note.publish_time).format('YYYY-MM-DD') }}</span>
+              </span>
+              <span v-if="note.publish_update_time">
+                <span> | 更新于</span>
+                <span>{{ moment(note.publish_update_time).format('YYYY-MM-DD') }}</span>
+              </span>
+            </div>
           </div>
         </div>
       </header>
-      <article v-html="parseMarkdown(note.note_content)"></article>
+      <article v-html="parseMarkdown(note.publish_note_content)"></article>
     </div>
     <footer>
       <div class="option-bar">

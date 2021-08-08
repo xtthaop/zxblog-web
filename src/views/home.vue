@@ -3,12 +3,17 @@
     <ul class="note-list" v-if="noteList.length">
       <li v-for="item in noteList" :key="item.note_id">
         <div class="content">
-          <a class="title" :href="`/note/${encryptNoteId(item.note_id)}`" target="_blank">{{ item.note_title }}</a>
-          <p class="abstract">
-            {{ getNoteAbstract(item.note_content) }}
-          </p>
+          <a class="title" :href="`/note/${encryptNoteId(item.note_id)}`" target="_blank">{{ item.publish_note_title }}</a>
+          <p class="abstract" v-html="getNoteAbstract(item.publish_note_content)"></p>
           <div class="meta">
-            <span>{{ moment(item.create_time).format('YYYY-MM-DD') }}</span>
+            <span>
+              <span>发布于</span>
+              <span>{{ moment(item.publish_time).format('YYYY-MM-DD') }}</span>
+            </span>
+            <span v-if="item.publish_update_time">
+              <span> | 更新于</span>
+              <span>{{ moment(item.publish_update_time).format('YYYY-MM-DD') }}</span>
+            </span>
           </div>
         </div>
       </li>

@@ -28,9 +28,10 @@ if(isProd){
 
   const { createProxyMiddleware } = require('http-proxy-middleware')
   const options = {
-    target: 'https://zxctb.top',
+    target: 'http://localhost:56899',
     changeOrigin: true,
     ws: true,
+    pathRewrite: {'/restful' : ''},
   }
   server.use(createProxyMiddleware('/restful', options))
 }
