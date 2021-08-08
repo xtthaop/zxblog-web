@@ -18,7 +18,7 @@ module.exports = merge(baseConfig, {
   plugins: [
     new webpack.DefinePlugin({
       'process.env.VUE_ENV': '"server"',
-      'process.env.API_BASE_URL': '"http://localhost:56899"',
+      'process.env.API_BASE_URL': '"https://zxctb.top/restful"',
     }),
     new VueSSRServerPlugin()
   ]
