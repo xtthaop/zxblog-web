@@ -4,7 +4,7 @@
       <header>
         <h1 class="title">{{ note.publish_note_title }}</h1>
         <div class="note-info">
-          <a class="author-avatar" href="/" target="_blank">
+          <a class="author-avatar" href="https://xtthaop.github.io" target="_blank">
             <img :src="avatar" />
           </a>
           <div style="margin-left:10px;">
