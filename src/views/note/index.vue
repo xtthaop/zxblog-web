@@ -66,8 +66,13 @@ import ShareDialog from './components/ShareDialog'
 import LikeDialog from './components/LikeDialog'
 import SharePop from './components/SharePop'
 import { getWxConfig } from '@/api/index'
+import titleMixin from '@/mixins/title-mixin'
 
 export default {
+  mixins: [titleMixin],
+  title(){
+    return '知行 | ' + this.note.publish_note_title
+  },
   asyncData({ store, route }){
     return store.dispatch('fetchNote', route.params.id)
   },
