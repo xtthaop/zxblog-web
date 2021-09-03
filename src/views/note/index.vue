@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import 'highlight.js/styles/atom-one-dark.css'
+import 'highlight.js/styles/vs2015.css'
 import avatar from '@/assets/images/avatar.png'
 import ShareDialog from './components/ShareDialog'
 import LikeDialog from './components/LikeDialog'
@@ -490,7 +490,8 @@ article{
     vertical-align: middle;
     border: none;
     color: #c7254e;
-    font-size: 13px;
+    font-size: 15px;
+    line-height: 25px;
     white-space: pre-wrap;
   }
 
