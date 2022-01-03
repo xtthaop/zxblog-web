@@ -147,6 +147,7 @@ export default {
         const wx = require('weixin-js-sdk')
 
         wx.config({
+          debug: true,
           appId: res.data.appId,
           timestamp: res.data.timestamp,
           nonceStr: res.data.nonceStr,
