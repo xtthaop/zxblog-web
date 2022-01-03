@@ -147,7 +147,6 @@ export default {
         const wx = require('weixin-js-sdk')
 
         wx.config({
-          debug: true,
           appId: res.data.appId,
           timestamp: res.data.timestamp,
           nonceStr: res.data.nonceStr,
@@ -161,7 +160,7 @@ export default {
         wx.ready(() => {
           wx.updateAppMessageShareData({
             title: this.note.note_title,
-            desc: this.getNoteAbstract(this.note.note_content),
+            desc: this.getNoteAbstract(this.note.publish_note_content),
             link: location.href,
             imgUrl: location.origin + '/public/images/logo.png',
             success: () => {}
