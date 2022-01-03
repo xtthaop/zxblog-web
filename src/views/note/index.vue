@@ -152,13 +152,13 @@ export default {
           nonceStr: res.data.nonceStr,
           signature: res.data.signature,
           jsApiList: [
-            'onMenuShareAppMessage',
-            'onMenuShareTimeline',
+            'updateAppMessageShareData',
+            'updateTimelineShareData',
           ]
         })
 
         wx.ready(() => {
-          wx.onMenuShareAppMessage({
+          wx.updateAppMessageShareData({
             title: this.note.note_title,
             desc: this.getNoteAbstract(this.note.note_content),
             link: location.href,
@@ -166,7 +166,7 @@ export default {
             success: () => {}
           })
 
-          wx.onMenuShareTimeline({
+          wx.updateTimelineShareData({
             title: this.note.note_title,
             link: location.href,
             imgUrl: location.origin + '/public/images/logo.png',

@@ -48,6 +48,9 @@ server.get('*', (req, res) => {
 
   renderer.renderToString(context, (err, html) => {
     if(err){
+      if(!isProd){
+        console.log(err)
+      }
       if(err.code === 404){
         res.status(404).end('Page not found')
       }else{
