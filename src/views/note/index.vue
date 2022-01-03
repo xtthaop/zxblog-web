@@ -159,7 +159,7 @@ export default {
 
         wx.ready(() => {
           wx.updateAppMessageShareData({
-            title: this.note.note_title,
+            title: this.note.publish_note_title,
             desc: this.getNoteAbstract(this.note.publish_note_content),
             link: location.href,
             imgUrl: location.origin + '/public/images/logo.png',
@@ -167,7 +167,7 @@ export default {
           })
 
           wx.updateTimelineShareData({
-            title: this.note.note_title,
+            title: this.note.publish_note_title,
             link: location.href,
             imgUrl: location.origin + '/public/images/logo.png',
             success: () => {}
