@@ -95,6 +95,9 @@ export default {
   },
   mounted(){
     this.handleGetWxConfig()
+    this.$nextTick(() => {
+      this.setImgLazyLoad()
+    })
   },
   methods: {
     shareMenuToggle(){
@@ -217,8 +220,17 @@ export default {
         const token = tokens[idx]
         token.attrs[token.attrIndex('alt')][1] = self.renderInlineAsText(token.children, options, env)
 
+        const imgArr = token.attrs[token.attrIndex('src')][1].split('?')
+        const imgSrc = imgArr[0]
+        const imgParams = (imgArr.length > 1) && imgArr[1].split('/')
+        const imgWidth = imgParams && imgParams[1]
+        const imgSuffix = '.' + imgSrc.split('.')[1]
+        const imgPlaceholderSrc = imgSrc.replace(imgSuffix, '') + '_low_ratio' + imgSuffix
+
         return '<div class="image-package"><img' + 
-              '  src="' + token.attrs[token.attrIndex('src')][1] + '"' + 
+              '  data-src="' + imgSrc + '"' + 
+              '  src="' + imgPlaceholderSrc + '"' + 
+              (imgWidth ? 'width="' + imgWidth + '"' : 'width="100%"') +
               '  alt="' + token.attrs[token.attrIndex('alt')][1] + '"' +
               '  title="' + (token.attrs[token.attrIndex('title')] ? token.attrs[token.attrIndex('title')][1] : '') + '"' +
               '/></div>'
@@ -227,6 +239,35 @@ export default {
       let abstract = md.render(content)
       return abstract
     },
+    setImgLazyLoad(){
+      const imgs = document.getElementsByTagName("img")
+      const viewHeight = window.innerHeight || document.documentElement.clientHeight
+      this.imgLazyLoad(imgs, viewHeight)
+      window.addEventListener('scroll', () => this.debounce(this.imgLazyLoad, 200)(imgs, viewHeight))
+    },
+    imgLazyLoad(imgs, viewHeight){
+      for(let i = 0; i < imgs.length; i++){
+        const distance = viewHeight - imgs[i].getBoundingClientRect().top
+        if(distance >= 0){
+          const imgSrc = imgs[i].getAttribute('data-src')
+          if(!imgSrc) continue
+          const img = new Image()
+          img.src = imgSrc
+          img.onload = () => {
+            imgs[i].src = imgSrc
+          }
+        }
+      }
+    },
+    debounce(f, wait){
+      let timer
+      return (...args) => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          f(...args)
+        }, wait)
+      }
+    }
   }
 }
 </script>
@@ -522,7 +563,6 @@ article{
 
     img{
       max-width: 100%;
-      width: auto;
       height: auto;
     }
   }
