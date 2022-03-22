@@ -19,4 +19,8 @@ export default {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
 }
+
+.katex {
+  font: 400 1.1em KaTeX_Main !important;
+}
 </style>

@@ -180,6 +180,8 @@ export default {
     },
     parseMarkdown(content){
       const hljs = require('highlight.js/lib/common')
+      const mk = require('markdown-it-katex')
+
       const md = require('markdown-it')({
         breaks: true,
         highlight: (str, lang) => {
@@ -194,6 +196,8 @@ export default {
           return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>';
         }
       })
+      
+      md.use(mk)
 
       // add target="_blank" to all links
       // Remember old renderer, if overridden, or proxy to default renderer
