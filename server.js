@@ -39,6 +39,7 @@ if(isProd){
 server.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 server.use('/dist', express.static(__dirname + '/dist'))
 server.use('/public', express.static(__dirname + '/public'))
+server.use('/', express.static(__dirname + '/public'))
 
 server.get('*', (req, res) => {
   const context = {
