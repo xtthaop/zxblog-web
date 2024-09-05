@@ -1,0 +1,40 @@
+:root {
+  --color: #333;
+  --color-primary: #0969f5;
+  --bg: #fff;
+  --bg-secondary: #efefef;
+  --border-color: #efefef;
+}
+
+.dark {
+  --color: #ebf4f1;
+  --color-primary: #0969f5;
+  --color-secondary: #fdf9f3;
+  --bg: #091a28;
+  --bg-secondary: #071521;
+  --border-color: #0d2538;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--color);
+  transition: background-color 0.3s;
+  font-family:
+    Helvetica Neue,
+    Helvetica,
+    PingFang SC,
+    Hiragino Sans GB,
+    Microsoft YaHei,
+    Arial,
+    sans-serif;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}

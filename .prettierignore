@@ -1,0 +1,15 @@
+.nuxt
+.output
+.husky
+.vscode
+assets/imgs
+node_modules
+public
+.gitignore
+.prettierrc.json
+tsconfig.json
+pnpm-lock.yaml
+LICENSE.md
+package.json
+README.md
+.prettierignore
