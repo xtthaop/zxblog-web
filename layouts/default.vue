@@ -97,8 +97,6 @@ const isDark = computed({
       height: 100%;
       max-width: 780px;
       margin: 0 auto;
-      background: var(--bg);
-      border-radius: 5px;
     }
   }
 }

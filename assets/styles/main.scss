@@ -1,5 +1,7 @@
 :root {
   --color: #333;
+  --color-secondary: #999;
+  --color-third: #aaa;
   --color-primary: #0969f5;
   --bg: #fff;
   --bg-secondary: #efefef;
@@ -7,12 +9,13 @@
 }
 
 .dark {
-  --color: #ebf4f1;
+  --color: #d2d6da;
+  --color-secondary: #8f9296;
+  --color-third: #797c7f;
   --color-primary: #0969f5;
-  --color-secondary: #fdf9f3;
   --bg: #091a28;
   --bg-secondary: #071521;
-  --border-color: #0d2538;
+  --border-color: #071521;
 }
 
 html {
@@ -22,7 +25,6 @@ html {
 body {
   background-color: var(--bg);
   color: var(--color);
-  transition: background-color 0.3s;
   font-family:
     Helvetica Neue,
     Helvetica,
@@ -37,4 +39,17 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
+}
+
+* {
+  transition:
+    color 0.3s,
+    background-color 0.3s,
+    border-color 0.3s;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
