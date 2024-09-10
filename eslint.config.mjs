@@ -16,6 +16,7 @@ export default withNuxt(
   {
     rules: {
       'no-console': 'error',
+      'vue/no-v-html': 'off',
       'prettier/prettier': [
         'warn',
         {

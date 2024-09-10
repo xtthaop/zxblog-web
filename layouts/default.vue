@@ -1,10 +1,11 @@
 <template>
   <div class="layout">
+    <!-- TODO 头部背景投影效果 -->
     <div class="header-wrapper">
       <header>
-        <a class="logo" href="/" target="_self">
+        <NuxtLink class="logo" to="/">
           <img src="~/assets/imgs/logo-text.png" />
-        </a>
+        </NuxtLink>
         <div>
           <div class="theme-switcher">
             <ClientOnly>
@@ -61,7 +62,7 @@ const isDark = computed({
     height: 56px;
     background: var(--bg);
     margin-bottom: 10px;
-    z-index: 1030;
+    z-index: 50;
 
     header {
       display: flex;

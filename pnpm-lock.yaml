@@ -11,12 +11,18 @@ dependencies:
   '@nuxt/ui':
     specifier: ^2.18.4
     version: registry.npmmirror.com/@nuxt/ui@2.18.4(vite@5.4.3)(vue@3.5.1)
+  '@xtthaop/markdown-it-katex':
+    specifier: 2.0.5
+    version: registry.npmmirror.com/@xtthaop/markdown-it-katex@2.0.5
   dayjs:
     specifier: ^1.11.11
     version: registry.npmmirror.com/dayjs@1.11.13
   dayjs-nuxt:
     specifier: ^2.1.11
     version: registry.npmmirror.com/dayjs-nuxt@2.1.11
+  highlight.js:
+    specifier: ^11.9.0
+    version: registry.npmmirror.com/highlight.js@11.10.0
   markdown-it:
     specifier: ^14.1.0
     version: registry.npmmirror.com/markdown-it@14.1.0
@@ -3376,6 +3382,14 @@ packages:
       - vue
     dev: false
 
+  registry.npmmirror.com/@xtthaop/markdown-it-katex@2.0.5:
+    resolution: {integrity: sha512-azVTCK/yp9ljs3kQ6X6gYeacYJUGXmm9Wi20foAPYPNyrLTmgRMc6HUIFAe28pZgXd0mbcV1ieAxfXw4EEhd0Q==, tarball: https://registry.npmmirror.com/@xtthaop/markdown-it-katex/-/markdown-it-katex-2.0.5.tgz}
+    name: '@xtthaop/markdown-it-katex'
+    version: 2.0.5
+    dependencies:
+      katex: registry.npmmirror.com/katex@0.16.11
+    dev: false
+
   registry.npmmirror.com/abbrev@1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/abbrev/-/abbrev-1.1.1.tgz}
     name: abbrev
@@ -4048,7 +4062,7 @@ packages:
     dev: true
 
   registry.npmmirror.com/commander@2.20.3:
-    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz}
+    resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==, tarball: https://registry.npmmirror.com/commander/-/commander-2.20.3.tgz}
     name: commander
     version: 2.20.3
     dev: false
@@ -4075,7 +4089,7 @@ packages:
     dev: false
 
   registry.npmmirror.com/commander@8.3.0:
-    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/commander/-/commander-8.3.0.tgz}
+    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==, tarball: https://registry.npmmirror.com/commander/-/commander-8.3.0.tgz}
     name: commander
     version: 8.3.0
     engines: {node: '>= 12'}
@@ -5809,6 +5823,13 @@ packages:
     dependencies:
       function-bind: registry.npmmirror.com/function-bind@1.1.2
 
+  registry.npmmirror.com/highlight.js@11.10.0:
+    resolution: {integrity: sha512-SYVnVFswQER+zu1laSya563s+F8VDGt7o35d4utbamowvUNLLMovFqwCLSocpZTz3MgaSRA1IbqRWZv97dtErQ==, tarball: https://registry.npmmirror.com/highlight.js/-/highlight.js-11.10.0.tgz}
+    name: highlight.js
+    version: 11.10.0
+    engines: {node: '>=12.0.0'}
+    dev: false
+
   registry.npmmirror.com/hookable@5.5.3:
     resolution: {integrity: sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hookable/-/hookable-5.5.3.tgz}
     name: hookable
@@ -6340,6 +6361,15 @@ packages:
       universalify: registry.npmmirror.com/universalify@2.0.1
     optionalDependencies:
       graceful-fs: registry.npmmirror.com/graceful-fs@4.2.11
+    dev: false
+
+  registry.npmmirror.com/katex@0.16.11:
+    resolution: {integrity: sha512-RQrI8rlHY92OLf3rho/Ts8i/XvjgguEjOkO1BEXcU3N8BqPpSzBNwV/G0Ukr+P/l3ivvJUE/Fa/CwbS6HesGNQ==, tarball: https://registry.npmmirror.com/katex/-/katex-0.16.11.tgz}
+    name: katex
+    version: 0.16.11
+    hasBin: true
+    dependencies:
+      commander: registry.npmmirror.com/commander@8.3.0
     dev: false
 
   registry.npmmirror.com/keygrip@1.1.0:

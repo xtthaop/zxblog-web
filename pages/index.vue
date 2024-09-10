@@ -3,9 +3,9 @@
     <ul v-if="noteList?.length" class="note-list">
       <li v-for="item in noteList" :key="item.note_id">
         <div class="item-wrapper">
-          <a class="title" :href="`/note/${encryptNoteId(item.note_id)}`" target="_self">
+          <NuxtLink class="title" :to="`/note/${encryptNoteId(item.note_id)}`">
             {{ item.publish_note_title }}
-          </a>
+          </NuxtLink>
           <p class="abstract">
             {{ getNoteAbstract(item.publish_note_content || '') }}
           </p>

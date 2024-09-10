@@ -9,13 +9,13 @@
 }
 
 .dark {
-  --color: #d2d6da;
-  --color-secondary: #8f9296;
-  --color-third: #797c7f;
+  --color: #e0e0e0;
+  --color-secondary: #999;
+  --color-third: #888;
   --color-primary: #0969f5;
-  --bg: #091a28;
-  --bg-secondary: #071521;
-  --border-color: #071521;
+  --bg: #1d1d1f;
+  --bg-secondary: #0f0f0f;
+  --border-color: #0f0f0f;
 }
 
 html {
@@ -39,13 +39,6 @@ body {
 *:before,
 *:after {
   box-sizing: inherit;
-}
-
-* {
-  transition:
-    color 0.3s,
-    background-color 0.3s,
-    border-color 0.3s;
 }
 
 ul {
