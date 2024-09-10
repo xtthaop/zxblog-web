@@ -2,7 +2,7 @@
 .output
 .husky
 .vscode
-assets/imgs
+assets
 node_modules
 public
 .gitignore
