@@ -1,6 +1,5 @@
 <template>
   <div class="layout">
-    <!-- TODO 头部背景投影效果 -->
     <div class="header-wrapper">
       <header>
         <NuxtLink class="logo" to="/">

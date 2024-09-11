@@ -67,6 +67,10 @@
 import useMarkdown from './useMarkdown'
 import useImgLazyLoad from './useImgLazyLoad'
 
+defineOptions({
+  name: 'Note',
+})
+
 const route = useRoute()
 const previewerRef = ref()
 
@@ -86,11 +90,11 @@ const { data: note } = await useAsyncData('note', async () => {
     note_id: decryptNoteId(route.params.encryptedId),
   }
   const { data } = await $fetch('/restful/note/get_published_note', { method: 'GET', params })
-  // TODO 刷新没有请求数据
-  useHead({
-    title: data.publish_note_title,
-  })
   return data || {}
+})
+
+useHead({
+  title: note.value.publish_note_title,
 })
 
 onMounted(() => {
