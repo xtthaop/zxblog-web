@@ -28,38 +28,19 @@
         v-html="md.render(note.publish_note_content || '')"
       ></div>
     </div>
-    <!-- <footer>
-      <div class="option-bar">
-        <div class="option">
-          <div class="item">
-            <div class="btn" @click="$refs.likeDialog.open()">
-              <svg-icon iconClass="like" className="icon"></svg-icon>
-              <span class="text">赞赏</span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="btn" @click.stop="shareMenuToggle">
-              <svg-icon iconClass="share" className="icon"></svg-icon>
-              <span class="text">分享</span>
-            </div>
-            <ul class="menu" v-if="shareMenuShow" @click="shareMenuToggle">
-              <li @click="copyUrl">
-                <svg-icon iconClass="link" className="icon link"></svg-icon>
-                <span>复制链接</span>
-              </li>
-              <li @click="showQRCode">
-                <svg-icon iconClass="wechat" className="icon wechat"></svg-icon>
-                <span>微信分享</span>
-              </li>
-            </ul>
-          </div>
+    <div class="side-actions-wrapper">
+      <button class="like">
+        <div class="icon-wrapper">
+          <UIcon
+            ref="LikeIconRef"
+            name="i-heroicons-gift-20-solid"
+            style="color: rgb(247, 45, 89)"
+            class="animate__wobble animate__animated animate__delay-5s"
+          />
         </div>
-      </div>
-    </footer> -->
-
-    <!-- <ShareDialog ref="shareDialog"></ShareDialog> -->
-    <!-- <LikeDialog ref="likeDialog"></LikeDialog> -->
-    <!-- <SharePop v-if="sharePopShow" :sharePopShow.sync="sharePopShow"></SharePop> -->
+        <div class="text">赞赏</div>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -154,86 +135,32 @@ onMounted(() => {
   }
 }
 
-footer {
-  width: 100%;
+.side-actions-wrapper {
+  position: fixed;
+  top: 106px;
+  left: calc(50vw - 470px);
+  background-color: transparent;
 
-  .option-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 56px;
-    background: #fff;
-    border-top: 1px solid #eee;
+  button {
+    background-color: transparent;
 
-    .option {
-      width: 100%;
-      max-width: 780px;
-      height: 100%;
-      box-sizing: border-box;
-      padding: 0 15px;
-      margin: 0 auto;
+    .icon-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      height: 50px;
+      background-color: var(--bg);
+      border-radius: 50%;
+      margin-bottom: 10px;
 
-      .item {
-        position: relative;
-        float: right;
-        line-height: 56px;
-        margin-left: 15px;
-        cursor: pointer;
-
-        .btn {
-          display: flex;
-          align-items: center;
-          user-select: none;
-
-          .icon {
-            color: #03a9f4;
-            font-size: 22px;
-          }
-
-          .text {
-            font-size: 14px;
-            color: #666;
-            margin-left: 2px;
-          }
-        }
-
-        .menu {
-          position: absolute;
-          left: 0;
-          bottom: 45px;
-          margin: 0;
-          padding: 0;
-          list-style: none;
-          width: 110px;
-          border: 1px solid #efefef;
-          border-radius: 5px;
-          background: #fff;
-
-          li {
-            display: flex;
-            align-items: center;
-            margin: 0;
-            padding: 10px;
-            line-height: 18px;
-            font-size: 14px;
-            color: #666;
-            border-bottom: 1px solid #efefef;
-
-            &:last-child {
-              border-bottom: none;
-            }
-
-            .icon {
-              margin-right: 5px;
-              font-size: 20px;
-              &.link {
-                color: #999;
-              }
-            }
-          }
-        }
+      .iconify {
+        font-size: 24px;
       }
+    }
+
+    .text {
+      font-size: 14px;
     }
   }
 }

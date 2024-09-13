@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint', '@nuxt/ui', 'dayjs-nuxt'],
   css: [
     'normalize.css/normalize.css',
+    'animate.css',
     '~/assets/styles/main.scss',
     '~/assets/styles/md.scss',
     '~/assets/styles/katex.min.css',

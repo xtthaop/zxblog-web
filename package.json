@@ -26,6 +26,7 @@
     "@iconify-json/heroicons": "^1.2.0",
     "@nuxt/ui": "^2.18.4",
     "@xtthaop/markdown-it-katex": "2.0.5",
+    "animate.css": "^4.1.1",
     "dayjs": "^1.11.11",
     "dayjs-nuxt": "^2.1.11",
     "highlight.js": "^11.9.0",
