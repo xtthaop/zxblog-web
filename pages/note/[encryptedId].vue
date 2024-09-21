@@ -8,7 +8,7 @@
             <img src="~/assets/imgs/avatar.png" />
           </a>
           <div style="margin-left: 10px">
-            <div class="author-name">陈涛</div>
+            <div class="author-name">tao</div>
             <div class="note-detail">
               <span>
                 <span>发布于</span>
@@ -29,18 +29,36 @@
       ></div>
     </div>
     <div class="side-actions-wrapper">
-      <button class="like">
+      <button class="like" @click="likeModalOpen = true">
         <div class="icon-wrapper">
           <UIcon
-            ref="LikeIconRef"
             name="i-heroicons-gift-20-solid"
-            style="color: rgb(247, 45, 89)"
+            style="color: #f72d59"
             class="animate__wobble animate__animated animate__delay-5s"
           />
         </div>
         <div class="text">赞赏</div>
       </button>
+
+      <button class="share">
+        <div class="icon-wrapper">
+          <UIcon name="i-heroicons-paper-airplane-solid" style="transform: rotate(-45deg)" />
+        </div>
+        <div class="text">分享</div>
+      </button>
     </div>
+
+    <UModal v-model="likeModalOpen">
+      <div class="like-modal-content">
+        <img src="~/assets/imgs/like.jpeg" />
+        <div class="tip">
+          为了维持本站的运行，我需要投入时间和精力进行维护，同时也需要支付云服务厂商服务器和域名的费用。因此如果我的网络笔记对您有帮助，欢迎通过<span
+            style="color: #67cc79"
+            >微信扫一扫</span
+          >赞赏码来支持我，您的每一份支持都是我继续前进的动力！
+        </div>
+      </div>
+    </UModal>
   </div>
 </template>
 
@@ -77,6 +95,8 @@ const { data: note } = await useAsyncData('note', async () => {
 useHead({
   title: note.value.publish_note_title,
 })
+
+const likeModalOpen = ref(false)
 
 onMounted(() => {
   handleImgLazyLoad()
@@ -137,31 +157,62 @@ onMounted(() => {
 
 .side-actions-wrapper {
   position: fixed;
-  top: 106px;
+  top: 196px;
   left: calc(50vw - 470px);
+  display: flex;
+  flex-direction: column;
   background-color: transparent;
 
   button {
     background-color: transparent;
+    color: #8491a5;
+    margin-bottom: 10px;
 
     .icon-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 50px;
-      height: 50px;
-      background-color: var(--bg);
+      height: 40px;
+      background-color: transparent;
       border-radius: 50%;
-      margin-bottom: 10px;
 
       .iconify {
-        font-size: 24px;
+        font-size: 20px;
       }
     }
 
     .text {
       font-size: 14px;
     }
+
+    &.like {
+      .icon-wrapper {
+        height: 50px;
+        background-color: var(--bg);
+        margin-bottom: 10px;
+
+        .iconify {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+}
+
+.like-modal-content {
+  padding: 20px;
+
+  img {
+    width: 100%;
+  }
+
+  .tip {
+    width: 100%;
+    margin-top: 10px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #aaa;
   }
 }
 </style>
