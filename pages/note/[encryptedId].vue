@@ -41,10 +41,24 @@
       </button>
 
       <button class="share">
-        <div class="icon-wrapper">
-          <UIcon name="i-heroicons-paper-airplane-solid" style="transform: rotate(-45deg)" />
-        </div>
-        <div class="text">分享</div>
+        <UDropdown
+          :items="shareItems"
+          :popper="{ placement: 'right' }"
+          :ui="{ width: 'w-36', item: { disabled: 'opacity-100' } }"
+        >
+          <div style="text-align: center">
+            <div class="icon-wrapper">
+              <UIcon name="i-heroicons-paper-airplane-solid" style="transform: rotate(-45deg)" />
+            </div>
+            <div class="text">分享</div>
+          </div>
+
+          <template #wechat>
+            <div class="qrcode-wrapper">
+              <img :src="QRCodeURL" />
+            </div>
+          </template>
+        </UDropdown>
       </button>
     </div>
 
@@ -65,6 +79,7 @@
 <script setup>
 import useMarkdown from './useMarkdown'
 import useImgLazyLoad from './useImgLazyLoad'
+import QRCode from 'qrcode'
 
 defineOptions({
   name: 'Note',
@@ -72,6 +87,7 @@ defineOptions({
 
 const route = useRoute()
 const previewerRef = ref()
+const toast = useToast()
 
 const { md } = useMarkdown()
 const { loadImgFn: handleImgLazyLoad } = useImgLazyLoad(previewerRef)
@@ -100,6 +116,68 @@ const likeModalOpen = ref(false)
 
 onMounted(() => {
   handleImgLazyLoad()
+})
+
+const shareItems = [
+  [
+    {
+      label: '复制链接',
+      icon: 'i-heroicons-link-16-solid',
+      click: () => {
+        copyUrl()
+      },
+    },
+    {
+      label: '微信扫一扫',
+      icon: 'i-ic-baseline-wechat',
+      iconClass: 'text-green-500',
+      disabled: true,
+    },
+    {
+      disabled: true,
+      slot: 'wechat',
+    },
+  ],
+]
+
+function copyUrl() {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(location.href).then(() => {
+      toast.add({ title: '链接复制成功！' })
+    })
+  } else {
+    const input = document.createElement('input')
+    input.setAttribute('value', location.href)
+    document.body.appendChild(input)
+    input.select()
+    document.execCommand('copy')
+    document.body.removeChild(input)
+    toast.add({ title: '链接复制成功！' })
+  }
+}
+
+const QRCodeURL = ref('')
+
+function generateQRCode() {
+  const opts = {
+    errorCorrectionLevel: 'H',
+    type: 'image/jpeg',
+    quality: 1,
+    margin: 1,
+    color: {
+      dark: '#000000ff',
+      light: '#ffffffff',
+    },
+  }
+
+  QRCode.toDataURL(location.href, opts, function (err, url) {
+    if (err) throw err
+    QRCodeURL.value = url
+  })
+}
+
+onMounted(() => {
+  generateQRCode()
 })
 </script>
 
@@ -195,6 +273,16 @@ onMounted(() => {
         .iconify {
           font-size: 24px;
         }
+      }
+    }
+
+    .qrcode-wrapper {
+      width: 80px;
+      height: 80px;
+
+      img {
+        width: 100%;
+        margin-left: 22px;
       }
     }
   }
