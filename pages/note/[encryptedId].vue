@@ -62,6 +62,41 @@
       </button>
     </div>
 
+    <div class="bottom-actions-wrapper">
+      <div class="actions-bar">
+        <button class="like" @click="likeModalOpen = true">
+          <UIcon
+            name="i-heroicons-gift-20-solid"
+            style="color: #f72d59"
+            class="animate__wobble animate__animated animate__delay-5s"
+          />
+          <span class="text">赞赏</span>
+        </button>
+
+        <button class="share">
+          <UDropdown
+            :items="shareItems"
+            :popper="{ placement: 'top' }"
+            :ui="{ width: 'w-36', item: { disabled: 'opacity-100' } }"
+          >
+            <div>
+              <UIcon
+                name="i-heroicons-paper-airplane-solid"
+                style="transform: translate(2px, -1px) rotate(-45deg) scale(0.9)"
+              />
+              <span class="text">分享</span>
+            </div>
+
+            <template #wechat>
+              <div class="qrcode-wrapper">
+                <img :src="QRCodeURL" />
+              </div>
+            </template>
+          </UDropdown>
+        </button>
+      </div>
+    </div>
+
     <UModal v-model="likeModalOpen">
       <div class="like-modal-content">
         <img src="~/assets/imgs/like.jpeg" />
@@ -234,6 +269,10 @@ onMounted(() => {
 }
 
 .side-actions-wrapper {
+  @media (max-width: 960px) {
+    display: none;
+  }
+
   position: fixed;
   top: 196px;
   left: calc(50vw - 470px);
@@ -283,6 +322,57 @@ onMounted(() => {
       img {
         width: 100%;
         margin-left: 22px;
+      }
+    }
+  }
+}
+
+.bottom-actions-wrapper {
+  @media (min-width: 960px) {
+    display: none;
+  }
+
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  background: transparent;
+
+  .actions-bar {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    width: 780px;
+    height: 100%;
+    padding: 0 30px;
+    background: var(--bg);
+
+    button {
+      margin-left: 10px;
+      color: #8491a5;
+
+      .iconify {
+        font-size: 20px;
+        margin: 0 5px;
+        vertical-align: middle;
+      }
+
+      .text {
+        font-size: 14px;
+        vertical-align: middle;
+      }
+
+      .qrcode-wrapper {
+        width: 80px;
+        height: 80px;
+
+        img {
+          width: 100%;
+          margin-left: 22px;
+        }
       }
     }
   }
