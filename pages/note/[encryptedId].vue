@@ -28,63 +28,31 @@
         v-html="md.render(note.publish_note_content || '')"
       ></div>
     </div>
-    <div class="side-actions-wrapper">
-      <button class="like" @click="likeModalOpen = true">
-        <div class="icon-wrapper">
-          <UIcon
-            name="i-heroicons-gift-20-solid"
-            style="color: #f72d59"
-            class="animate__wobble animate__animated animate__delay-5s"
-          />
-        </div>
-        <div class="text">赞赏</div>
-      </button>
 
-      <button class="share">
-        <UDropdown
-          :items="shareItems"
-          :popper="{ placement: 'right' }"
-          :ui="{ width: 'w-36', item: { disabled: 'opacity-100' } }"
-        >
-          <div style="text-align: center">
-            <div class="icon-wrapper">
-              <UIcon name="i-heroicons-paper-airplane-solid" style="transform: rotate(-45deg)" />
-            </div>
-            <div class="text">分享</div>
-          </div>
-
-          <template #wechat>
-            <div class="qrcode-wrapper">
-              <img :src="QRCodeURL" />
-            </div>
-          </template>
-        </UDropdown>
-      </button>
-    </div>
-
-    <div class="bottom-actions-wrapper">
-      <div class="actions-bar">
+    <ClientOnly>
+      <div class="side-actions-wrapper">
         <button class="like" @click="likeModalOpen = true">
-          <UIcon
-            name="i-heroicons-gift-20-solid"
-            style="color: #f72d59"
-            class="animate__wobble animate__animated animate__delay-5s"
-          />
-          <span class="text">赞赏</span>
+          <div class="icon-wrapper">
+            <UIcon
+              name="i-heroicons-gift-20-solid"
+              style="color: #f72d59"
+              class="animate__wobble animate__animated animate__delay-5s"
+            />
+          </div>
+          <div class="text">赞赏</div>
         </button>
 
-        <button class="share">
+        <button v-if="!isWX" class="share">
           <UDropdown
             :items="shareItems"
-            :popper="{ placement: 'top' }"
+            :popper="{ placement: 'right' }"
             :ui="{ width: 'w-36', item: { disabled: 'opacity-100' } }"
           >
-            <div>
-              <UIcon
-                name="i-heroicons-paper-airplane-solid"
-                style="transform: translate(2px, -1px) rotate(-45deg) scale(0.9)"
-              />
-              <span class="text">分享</span>
+            <div style="text-align: center">
+              <div class="icon-wrapper">
+                <UIcon name="i-heroicons-paper-airplane-solid" style="transform: rotate(-45deg)" />
+              </div>
+              <div class="text">分享</div>
             </div>
 
             <template #wechat>
@@ -95,7 +63,42 @@
           </UDropdown>
         </button>
       </div>
-    </div>
+
+      <div class="bottom-actions-wrapper">
+        <div class="actions-bar">
+          <button class="like" @click="likeModalOpen = true">
+            <UIcon
+              name="i-heroicons-gift-20-solid"
+              style="color: #f72d59"
+              class="animate__wobble animate__animated animate__delay-5s"
+            />
+            <span class="text">赞赏</span>
+          </button>
+
+          <button v-if="!isWX" class="share">
+            <UDropdown
+              :items="shareItems"
+              :popper="{ placement: 'top' }"
+              :ui="{ width: 'w-36', item: { disabled: 'opacity-100' } }"
+            >
+              <div>
+                <UIcon
+                  name="i-heroicons-paper-airplane-solid"
+                  style="transform: translate(2px, -1px) rotate(-45deg) scale(0.9)"
+                />
+                <span class="text">分享</span>
+              </div>
+
+              <template #wechat>
+                <div class="qrcode-wrapper">
+                  <img :src="QRCodeURL" />
+                </div>
+              </template>
+            </UDropdown>
+          </button>
+        </div>
+      </div>
+    </ClientOnly>
 
     <UModal v-model="likeModalOpen">
       <div class="like-modal-content">
@@ -115,6 +118,8 @@
 import useMarkdown from './useMarkdown'
 import useImgLazyLoad from './useImgLazyLoad'
 import QRCode from 'qrcode'
+import wx from 'weixin-js-sdk'
+import getNoteAbstract from '~/utils/getNoteAbstract'
 
 defineOptions({
   name: 'Note',
@@ -211,8 +216,46 @@ function generateQRCode() {
   })
 }
 
+const isWX = ref()
+
+async function getWXConfig() {
+  const ua = navigator.userAgent.toLowerCase()
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+    isWX.value = true
+  }
+
+  const params = {
+    url: location.href,
+  }
+
+  const res = await $fetch('/restful/note/get_wx_config', { method: 'GET', params })
+
+  wx.config({
+    ...res.data,
+    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'],
+  })
+
+  wx.ready(() => {
+    wx.updateAppMessageShareData({
+      title: note.value.publish_note_title,
+      desc: getNoteAbstract(note.value.publish_note_content),
+      link: location.href,
+      imgUrl: location.origin + '/logo.png',
+      success: () => {},
+    })
+
+    wx.updateTimelineShareData({
+      title: note.value.publish_note_title,
+      link: location.href,
+      imgUrl: location.origin + '/logo.png',
+      success: () => {},
+    })
+  })
+}
+
 onMounted(() => {
   generateQRCode()
+  getWXConfig()
 })
 </script>
 

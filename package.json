@@ -35,7 +35,8 @@
     "normalize.css": "^8.0.1",
     "nuxt": "^3.13.0",
     "qrcode": "^1.5.4",
-    "vue": "latest"
+    "vue": "latest",
+    "weixin-js-sdk": "^1.6.5"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.5.5",
