@@ -222,6 +222,8 @@ async function getWXConfig() {
   const ua = navigator.userAgent.toLowerCase()
   if (ua.match(/MicroMessenger/i) == 'micromessenger') {
     isWX.value = true
+  } else {
+    return
   }
 
   const params = {
@@ -312,10 +314,6 @@ onMounted(() => {
 }
 
 .side-actions-wrapper {
-  @media (max-width: 960px) {
-    display: none;
-  }
-
   position: fixed;
   top: 196px;
   left: calc(50vw - 470px);
@@ -368,13 +366,13 @@ onMounted(() => {
       }
     }
   }
+
+  @media (max-width: 960px) {
+    display: none;
+  }
 }
 
 .bottom-actions-wrapper {
-  @media (min-width: 960px) {
-    display: none;
-  }
-
   position: fixed;
   left: 0;
   bottom: 0;
@@ -418,6 +416,10 @@ onMounted(() => {
         }
       }
     }
+  }
+
+  @media (min-width: 960px) {
+    display: none;
   }
 }
 
