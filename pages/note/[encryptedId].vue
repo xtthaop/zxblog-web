@@ -148,6 +148,10 @@ const { data: note } = await useAsyncData('note', async () => {
   return data || {}
 })
 
+if (!note.value.note_id) {
+  throw createError({ statusCode: 404, statusMessage: `Page Not Found: ${route.path}` })
+}
+
 useHead({
   title: note.value.publish_note_title,
 })

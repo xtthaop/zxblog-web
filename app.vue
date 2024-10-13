@@ -15,7 +15,7 @@
 const appName = '知行'
 useHead({
   titleTemplate: (title) => {
-    return title ? `${appName} - ${title}` : appName
+    return title ? `${appName} | ${title}` : appName
   },
 })
 </script>

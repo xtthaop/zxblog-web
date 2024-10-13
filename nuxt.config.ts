@@ -18,7 +18,7 @@ export default defineNuxtConfig({
   ],
   nitro: {
     routeRules: {
-      '/restful/**': { proxy: 'http://zxctb.me:8888/**' },
+      '/restful/**': { proxy: process.env.ROUTE_PROXY },
     },
   },
 })

@@ -14,7 +14,8 @@ logs
 
 # 本地环境文件
 .env.*
-!.env.example
+!.env.development
+!.env.production
 
 # Editor directories and files
 .vscode/*
