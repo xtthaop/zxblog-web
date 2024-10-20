@@ -238,11 +238,11 @@ async function getWXConfig() {
 
   wx.config({
     ...res.data,
-    jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData'],
+    jsApiList: ['onMenuShareAppMessage', 'onMenuShareTimeline'],
   })
 
   wx.ready(() => {
-    wx.updateAppMessageShareData({
+    wx.onMenuShareAppMessage({
       title: note.value.publish_note_title,
       desc: getNoteAbstract(note.value.publish_note_content),
       link: location.href,
@@ -250,7 +250,7 @@ async function getWXConfig() {
       success: () => {},
     })
 
-    wx.updateTimelineShareData({
+    wx.onMenuShareTimeline({
       title: note.value.publish_note_title,
       link: location.href,
       imgUrl: location.origin + '/logo.png',
