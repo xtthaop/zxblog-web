@@ -6,7 +6,10 @@
   <span style="color: #0a69f5">知行博客</span>
 </p>
 
-[博客预览](https://zxctb.top:8080)  
+[博客预览](https://zxctb.top:8080) 
+
+![zxblog.png](https://github.com/xtthaop/image-lib/blob/master/zxnote/zxblog.png?raw=true)
+![zxblog.note.png](https://github.com/xtthaop/image-lib/blob/master/zxnote/zxblog.note.png?raw=true)
 
 ### 简介
 
