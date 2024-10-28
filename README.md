@@ -1,23 +1,25 @@
 <p align="center">
-  <img src="" width="50px" />
+  <img src="./public/logo.png" width="50px" />
 </p>
 
 <p align="center">
-  <span style="color: ">知行博客</span>
+  <span style="color: #0a69f5">知行博客</span>
 </p>
 
-播客预览：[ZXNOTE](https://zxctb.top:9090)  
-详细文档：[DOCUMENT]()
+[博客预览](https://zxctb.top:8080)  
 
 ### 简介
 
-支持展示[知行笔记](https://github.com/xtthaop/zxnote-web)所发布的笔记；  
-支持复制链接分享、微信分享；  
-支持显示赞赏码；  
-接入百度统计；  
+展示[知行笔记内容管理系统](https://github.com/xtthaop/zxnote-web)所发布的笔记；  
+支持调用微信平台接口将笔记分享给微信好友；  
+接入百度统计可在百度统计平台查看访问数据；  
+支持显示赞赏码获取内容创作收入；  
 ……
 
 ### 快速开始
+
+node v18.17.0  
+pnpm v8.10.2
 
 **初始化安装依赖**
 
@@ -37,9 +39,16 @@ pnpm run dev
 pnpm run build
 ```
 
+生产环境可安装 pm2 管理运行服务
+
+```
+npm install pm2 -g
+pm2 start ecosystem.config.cjs
+```
+
 ### 关于作者
 
-ZXBLOG 的作者是一名前端小学生，水平不高，文档或者代码中如有不当之处还请指正。
+知行博客的作者是一名前端小学生，水平不高，文档或者代码中如有不当之处还请指正。
 
 ### 成为赞助者
 
