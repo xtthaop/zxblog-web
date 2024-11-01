@@ -49,6 +49,9 @@ dependencies:
     version: registry.npmmirror.com/weixin-js-sdk@1.6.5
 
 devDependencies:
+  '@iconify-json/uil':
+    specifier: ^1.2.1
+    version: registry.npmmirror.com/@iconify-json/uil@1.2.1
   '@nuxt/eslint':
     specifier: ^0.5.5
     version: registry.npmmirror.com/@nuxt/eslint@0.5.5(eslint@9.9.1)(typescript@5.5.4)(vite@5.4.3)
@@ -1468,6 +1471,14 @@ packages:
       '@iconify/types': registry.npmmirror.com/@iconify/types@2.0.0
     dev: false
 
+  registry.npmmirror.com/@iconify-json/uil@1.2.1:
+    resolution: {integrity: sha512-bQPtDp1nVaDL+ejECPENHJalspCQCZreCJ2LHWazm0pfoz34afKAQKMSb1mH8K/CPnibCQTM29AvXrHMpyjbtg==, tarball: https://registry.npmmirror.com/@iconify-json/uil/-/uil-1.2.1.tgz}
+    name: '@iconify-json/uil'
+    version: 1.2.1
+    dependencies:
+      '@iconify/types': registry.npmmirror.com/@iconify/types@2.0.0
+    dev: true
+
   registry.npmmirror.com/@iconify/collections@1.0.455:
     resolution: {integrity: sha512-jfH6SiRiz4quxh+5ECQDM1ue4+RE2z2MADySYUNZcC2Nz46q5Es29sCdk9s5o4hUpkUKj+vPnzoF0UAF0mXajg==, tarball: https://registry.npmmirror.com/@iconify/collections/-/collections-1.0.455.tgz}
     name: '@iconify/collections'
@@ -1480,7 +1491,6 @@ packages:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==, tarball: https://registry.npmmirror.com/@iconify/types/-/types-2.0.0.tgz}
     name: '@iconify/types'
     version: 2.0.0
-    dev: false
 
   registry.npmmirror.com/@iconify/utils@2.1.32:
     resolution: {integrity: sha512-LeifFZPPKu28O3AEDpYJNdEbvS4/ojAPyIW+pF/vUpJTYnbTiXUHkCh0bwgFRzKvdpb8H4Fbfd/742++MF4fPQ==, tarball: https://registry.npmmirror.com/@iconify/utils/-/utils-2.1.32.tgz}

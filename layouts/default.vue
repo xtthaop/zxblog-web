@@ -5,7 +5,24 @@
         <NuxtLink class="logo" to="/">
           <img src="~/assets/imgs/logo-text.png" />
         </NuxtLink>
-        <div>
+        <div class="flex">
+          <div class="github mr-2">
+            <ClientOnly>
+              <UTooltip text="网站源码已开源">
+                <UButton
+                  icon="i-uil-github"
+                  color="gray"
+                  variant="ghost"
+                  aria-label="Theme"
+                  to="https://github.com/xtthaop/zxblog-web"
+                  target="_blank"
+                />
+              </UTooltip>
+              <template #fallback>
+                <div class="w-8 h-8"></div>
+              </template>
+            </ClientOnly>
+          </div>
           <div class="theme-switcher">
             <ClientOnly>
               <UButton
@@ -16,7 +33,7 @@
                 @click="isDark = !isDark"
               />
               <template #fallback>
-                <div class="w-8 h-8" />
+                <div class="w-8 h-8"></div>
               </template>
             </ClientOnly>
           </div>
