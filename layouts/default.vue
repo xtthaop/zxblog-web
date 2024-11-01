@@ -62,6 +62,7 @@ const isDark = computed({
     background: var(--bg);
     margin-bottom: 10px;
     z-index: 50;
+    box-shadow: 0px 1px 5px var(--bg-secondary);
 
     header {
       display: flex;
