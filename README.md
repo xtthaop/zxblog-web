@@ -9,6 +9,7 @@
 [博客预览](https://zxctb.top:8080) 
 
 ![zxblog.png](https://github.com/xtthaop/image-lib/blob/master/zxnote/zxblog.png?raw=true)
+
 ![zxblog.note.png](https://github.com/xtthaop/image-lib/blob/master/zxnote/zxblog.note.png?raw=true)
 
 ### 简介
@@ -52,6 +53,8 @@ pm2 start ecosystem.config.cjs
 ### 关于作者
 
 知行博客的作者是一名前端小学生，水平不高，文档或者代码中如有不当之处还请指正。
+
+联系我：chentao231205@163.com
 
 ### 成为赞助者
 
